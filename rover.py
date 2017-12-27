@@ -4,28 +4,36 @@ hasPI = False
 try:
   import RPi.GPIO as GPIO
   sys.path.append(r'/home/pi')
-  hasPI = true
+  hasPI = True
+except:
+  pass
+
+hasPICam = False
+try:
+  import picamera
+  hasPICam = True
 except:
   pass
 
 class Rover:
 
   def __init__(self, sleepTime = 0.5):
-    self.sleep = sleepTime
+    pass
 
-  def forward(self):
+  def forward(self, speed):
     print "Calling forward"
+    # asn: if speed is X, the time to run will depend on distance per second of robot?
     if hasPI:
       GPIO.setmode(GPIO.BCM)
       GPIO.setup(19, GPIO.OUT)
       GPIO.setup(20, GPIO.OUT)
       GPIO.output(19, GPIO.HIGH)
       GPIO.output(20, GPIO.HIGH)
-      time.sleep(float(self.sleep))
+      time.sleep(float(speed))
       GPIO.output(19, GPIO.LOW)
       GPIO.output(20, GPIO.LOW)
 
-  def backward(self):
+  def backward(self, speed):
     print 'Calling backward!' 
     if hasPI:
       GPIO.setmode(GPIO.BCM)
@@ -33,11 +41,11 @@ class Rover:
       GPIO.setup(21, GPIO.OUT)
       GPIO.output(26, GPIO.HIGH)
       GPIO.output(21, GPIO.HIGH)
-      time.sleep(float(self.sleep))
+      time.sleep(float(speed))
       GPIO.output(26, GPIO.LOW)
       GPIO.output(21, GPIO.LOW)
 
-  def right(self):
+  def right(self, speed):
     print 'Calling right!'
     if hasPI:
       GPIO.setmode(GPIO.BCM)
@@ -45,12 +53,12 @@ class Rover:
       GPIO.setup(26, GPIO.OUT)
       GPIO.output(20, GPIO.HIGH)
       GPIO.output(26, GPIO.HIGH)
-      time.sleep(float(self.sleep))
+      time.sleep(float(speed))
       GPIO.output(20, GPIO.LOW)
       GPIO.output(26, GPIO.LOW)
 
 
-  def left(self):
+  def left(self, speed):
     print 'Calling left!'
     if hasPI:
       GPIO.setmode(GPIO.BCM)
@@ -58,7 +66,7 @@ class Rover:
       GPIO.setup(21, GPIO.OUT)
       GPIO.output(19, GPIO.HIGH)
       GPIO.output(21, GPIO.HIGH)
-      time.sleep(float(self.sleep))
+      time.sleep(float(speed))
       GPIO.output(19, GPIO.LOW)
       GPIO.output(21, GPIO.LOW)
 
@@ -69,4 +77,14 @@ class Rover:
       GPIO.output(26, GPIO.LOW)
       GPIO.output(19, GPIO.LOW)
       GPIO.output(21, GPIO.LOW)
+
+  def streamCamera(self):
+    if hasPICam:
+      with picamera.PiCamera() as camera:
+        stream = io.BytesIO()
+        for foo in camera.capture_continuous(stream, format='jpeg'):
+          stream.truncate()
+          stream.seek(0)
+          if process(stream):
+            break
 
