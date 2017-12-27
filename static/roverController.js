@@ -56,19 +56,24 @@ function init() {
 function setup() {
   var simCanvas = createCanvas(600, 400);
   simCanvas.parent('simContainer');
+  turtle.setStartPosition(width * 0.5, height * 0.5);
+}
+
+function mousePressed() {
+  turtle.setStartPosition(mouseX, mouseY);
 }
 
 function draw() {
   background(200);
   fill(50, 50, 50);
 
-  turtle.init(width * 0.5, height * 0.5);
+  turtle.init();
   var lastx = turtle.x;
   var lasty = turtle.y;
 
   robotMoves.forEach(function (ele) {
     turtle.move(ele);
-    curve(lastx, lasty, turtle.x, turtle.y);
+    line(lastx, lasty, turtle.x, turtle.y);
     lastx = turtle.x;
     lasty = turtle.y;
   });

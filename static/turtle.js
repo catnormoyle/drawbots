@@ -10,14 +10,21 @@ class Turtle {
   constructor() {
     this.x = 0;
     this.y = 0;
+    this.startx = 0;
+    this.starty = 0;
     this.theta = 0;
     this.turnRate = 10 * Math.PI/ 180.0;
     this.moveRate = 25; // conversion between IRL and canvas units
   }
 
-  init(w, h) {
-    this.x = w;
-    this.y = h;
+  setStartPosition(startx, starty) {
+    this.startx = startx;
+    this.starty = starty;
+  }
+
+  init() {
+    this.x = this.startx;
+    this.y = this.starty;
     this.theta = 0;
   }
 
