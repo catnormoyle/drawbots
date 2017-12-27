@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="js/config.js"></script>
+<title>{{ title }}</title>
 <script>
   window.onload = function() {
     var image = document.getElementById("camimg");
@@ -16,48 +16,31 @@
 }
 </script>
 </head>
+
 <body style="background-color:lightgrey">
-
-   <head>
-      <title>{{ title }}</title>
-   </head>
+  <h1>Rover 5 Control Panel</h1>
+  <h2>The date and time on the server is: {{ time }}</h2> 
    
-   <body>
-      <h1>Rover 5 Control Panel</h1>
-       <h2>The date and time on the server is: {{ time }}</h2> 
+   <!-- Ignore Google Hangout functionality for now --> 
+   <!-- <script src="https://apis.google.com/js/platform.js" async defer></script>
+   <g:hangout render="createhangout"></g:hangout> -->
       
-      <!-- Ignore Google Hangout functionality for now --> 
-      <!-- <script src="https://apis.google.com/js/platform.js" async defer></script>
-      <g:hangout render="createhangout"></g:hangout> -->
-      
-      
-      <img id="camimg" width="800" height="460"/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <!-- Directional navigation, add mapping to keyboard arrows next iteration --> 
+   <button onclick="goForward();"> Forward </button>
+   <br>
+   <button onclick="goLeft();"> Left </button>      &nbsp;
+   <button onclick="goStop();"> Stop </button>
+   &nbsp;
+   <button onclick="goRight();"> Right </button>
+   <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <button onclick="goBackward();"> Back </button>
+   <br><br>
 
-      
-      <br>
-
-
-      <br><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-      <!-- Directional navigation, add mapping to keyboard arrows next iteration --> 
-      <button onclick="goForward();"> Forward </button>
-      <br>
-      <button onclick="goLeft();"> Left </button>      &nbsp;
-
-      <button onclick="goStop();"> Stop </button>
-      &nbsp;
-      <button onclick="goRight();"> Right </button>
-      <br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button onclick="goBackward();"> Back </button>
-      <br><br>
-
-
-      <!-- Make Ajax calls from button clicks to trigger Flask / python code from serveJohnnyPive.py and send commands to robot -->      
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-      <script>           
+   <!-- Make Ajax calls from button clicks to trigger Flask / python code from serveJohnnyPive.py and send commands to robot -->      
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <script>           
  
 	 function goForward() {
     	 $.ajax({url:"/forward/"});
@@ -77,7 +60,11 @@
 	 function goRight() {
     	 $.ajax({url:"/right/"});
 	 }  	 	 	 
-      </script>          
+   </script>          
+   <img id="camimg" width="800" height="460", style="background:black;">
+   <br>
+
+   <br><br>
    </body>
 </html>
 
