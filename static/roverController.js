@@ -68,14 +68,13 @@ function draw() {
   fill(50, 50, 50);
 
   turtle.init();
-  var lastx = turtle.x;
-  var lasty = turtle.y;
+  var last = turtle.tip();
 
   robotMoves.forEach(function (ele) {
     turtle.move(ele);
-    line(lastx, lasty, turtle.x, turtle.y);
-    lastx = turtle.x;
-    lasty = turtle.y;
+    var current = turtle.tip();
+    line(last.x, last.y, current.x, current.y);
+    last = current;
   });
   turtle.draw();
 }

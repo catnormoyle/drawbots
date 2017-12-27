@@ -38,6 +38,13 @@ class Turtle {
     }
   }
 
+  tip() {
+    var dir = this.direction();
+    var x = this.x + 10 * dir.x;
+    var y = this.y + 10 * dir.y;
+    return {x:x, y:y};
+  }
+
   direction() {
     var x = -Math.sin(this.theta);
     var y =  Math.cos(this.theta);
