@@ -8,6 +8,7 @@
 <!-- Make Ajax calls from button clicks to trigger Flask / python code from serveJohnnyPive.py and send commands to robot -->      
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script language="javascript" type="text/javascript" src="static/p5.min.js"></script>
+<script language="javascript" type="text/javascript" src="static/turtle.js"></script>
 <script language="javascript" type="text/javascript" src="static/roverController.js"></script>
 
 <body style="background-color:lightgrey" onload="setTimeout('init();', 100);"> 
@@ -35,9 +36,6 @@
       
    <br><br>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-   <!-- Directional navigation, add mapping to keyboard arrows next iteration --> 
-           
    <button onclick="goForward();"> Forward </button>
    <br>
    <button onclick="goLeft();"> Left </button>     
