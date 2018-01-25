@@ -60,7 +60,8 @@ function setup() {
 }
 
 function mousePressed() {
-  turtle.setStartPosition(mouseX, mouseY);
+  // ASN FIX: Only respond if the mouse click is on the canvas
+  //turtle.setStartPosition(mouseX, mouseY);
 }
 
 function draw() {

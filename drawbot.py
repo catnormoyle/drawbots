@@ -15,7 +15,7 @@ try:
 except:
   pass
 
-class Rover:
+class Drawbot:
 
   def __init__(self, sleepTime = 0.5):
     pass
