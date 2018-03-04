@@ -1,4 +1,4 @@
-import serial
+import serial, sys,time
 
 hasPI = False
 try:
@@ -6,7 +6,7 @@ try:
   sys.path.append(r'/home/pi')
   hasPI = True
 except:
-  pass
+  print sys.exc_info()([0])
 
 hasPICam = False
 try:
@@ -32,6 +32,7 @@ class Drawbot:
       time.sleep(float(speed))
       GPIO.output(19, GPIO.LOW)
       GPIO.output(20, GPIO.LOW)
+      print "SET GPIO", 19, 20
 
   def backward(self, speed):
     print 'Calling backward!' 
@@ -44,6 +45,7 @@ class Drawbot:
       time.sleep(float(speed))
       GPIO.output(26, GPIO.LOW)
       GPIO.output(21, GPIO.LOW)
+      print "SET GPIO", 26, 21
 
   def right(self, speed):
     print 'Calling right!'
@@ -56,6 +58,7 @@ class Drawbot:
       time.sleep(float(speed))
       GPIO.output(20, GPIO.LOW)
       GPIO.output(26, GPIO.LOW)
+      print "SET GPIO", 20, 26
 
 
   def left(self, speed):
@@ -69,6 +72,7 @@ class Drawbot:
       time.sleep(float(speed))
       GPIO.output(19, GPIO.LOW)
       GPIO.output(21, GPIO.LOW)
+      print "SET GPIO", 19, 21
 
   def stop(self):
     print 'Calling stop!'
