@@ -60,8 +60,12 @@ function setup() {
 }
 
 function mousePressed() {
-  // ASN FIX: Only respond if the mouse click is on the canvas
-  //turtle.setStartPosition(mouseX, mouseY);
+  var canvasParent = document.getElementById('simContainer');
+  if (mouseX >= 0 && mouseX <= canvasParent.clientWidth && 
+      mouseY >= 0 && mouseY <= canvasParent.clientHeight)
+  {
+    turtle.setStartPosition(mouseX, mouseY);
+  }
 }
 
 function draw() {

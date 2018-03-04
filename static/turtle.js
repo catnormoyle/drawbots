@@ -77,7 +77,7 @@ class Turtle {
   }
 
   draw() {
-    console.log(this.x+" "+this.y);
+    //console.log(this.x+" "+this.y);
     push();
     fill(255,0,0);
     translate(this.x, this.y);
