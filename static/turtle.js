@@ -1,9 +1,9 @@
 
-var LEFT = 0;
-var RIGHT = 1;
+var LFT = 0;
+var RGT = 1;
 var FWD = 2;
 var BCK = 3;
-var STOP = 4;
+var STP = 4;
 
 class Turtle {
 
@@ -32,9 +32,9 @@ class Turtle {
     switch (cmd.dir) {
       case FWD: this.forward(cmd.speed); break;
       case BCK: this.backward(cmd.speed); break;
-      case STOP: this.stop(cmd.speed); break;
-      case LEFT: this.left(cmd.speed); break;
-      case RIGHT: this.right(cmd.speed); break;
+      case STP: this.stop(cmd.speed); break;
+      case LFT: this.left(cmd.speed); break;
+      case RGT: this.right(cmd.speed); break;
     }
   }
 
