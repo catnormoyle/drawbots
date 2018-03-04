@@ -78,6 +78,7 @@ class Turtle {
 
   draw() {
     //console.log(this.x+" "+this.y);
+    stroke(0,0,0);
     push();
     fill(255,0,0);
     translate(this.x, this.y);

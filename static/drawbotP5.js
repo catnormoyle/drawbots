@@ -9,6 +9,15 @@ function setup() {
   controller.setup(width * 0.5, height * 0.5);
 }
 
+function mouseDragged() {
+  var canvasParent = document.getElementById('simContainer');
+  if (mouseX >= 0 && mouseX <= canvasParent.clientWidth && 
+      mouseY >= 0 && mouseY <= canvasParent.clientHeight)
+  {
+    controller.mouseDragged(mouseX, mouseY);
+  }
+}
+
 function mousePressed() {
   var canvasParent = document.getElementById('simContainer');
   if (mouseX >= 0 && mouseX <= canvasParent.clientWidth && 

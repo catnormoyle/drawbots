@@ -19,6 +19,16 @@ def hello():
       'time': timeString
       }
    return render_template('main.html', **templateData)
+
+@app.route("/follow")
+def follow():
+   now = datetime.datetime.now()
+   timeString = now.strftime("%Y-%m-%d %H:%M")
+   templateData = {
+      'title' : 'Drawbots',
+      'time': timeString
+      }
+   return render_template('follow.html', **templateData)
   
 @app.route("/cam")
 def cam():
