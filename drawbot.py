@@ -1,4 +1,4 @@
-import serial, sys,time
+import sys,time
 
 hasPI = False
 try:
@@ -6,7 +6,8 @@ try:
   sys.path.append(r'/home/pi')
   hasPI = True
 except:
-  print sys.exc_info()([0])
+  print sys.exc_info()[0]
+  print "Cannot import RPi.GPIO...likely you are not running on the Pi!"
 
 hasPICam = False
 try:
