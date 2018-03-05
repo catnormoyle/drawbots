@@ -61,3 +61,4 @@ function goRight() {
   $.ajax({url:"/right?speed=" + speed});	 	 	 
   controller.goRight(speed);
 }  	
+

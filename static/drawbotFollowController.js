@@ -10,23 +10,11 @@ class DrawbotFollowController extends DrawbotController
 
     this.target = this.turtle.tip();
     this.pos = this.turtle.tip();
-    this.vel = {x:0, y:0};
+    this.vel = this.turtle.direction();
     this.veld = {x:0, y:0};
-    this.THETA = 0;
-    this.VEL = 1;
-    this.THETADOT = 2;
-    this.state = [0.,0.,0.];
-    this.deriv = [0.,0.,0.];
-    this.maxTorque = 40.0;
-    this.maxForce = 1000.0;
-    this.maxSpeed = 300.0;
-    this.arrivalDistance = 100;
-    this.dt = 0.01;
-    this.velKv = 5;
-    this.oriKp = 100;
-    this.oriKv = 20;
-    this.m = 1;
-    this.I = 1;
+    this.dt = 0.1*1000; // how fast we should update in milliseconds (don't want to overload bot)
+    this.lastTime = new Date();
+    this.timer = this.dt;
   }
 
   seek(pos, target) {
@@ -35,13 +23,8 @@ class DrawbotFollowController extends DrawbotController
     if (mag < 0.000001) {
       return vd;
     }
-    let speed = this.maxSpeed;
-    if (mag < this.arrivalDistance) {
-      var a = (mag/this.arrivalDistance); // slowdown
-      speed = this.maxSpeed * a * a * a;
-    }
-    vd.x = vd.x * (speed/mag);
-    vd.y = vd.y * (speed/mag);
+    vd.x = vd.x / mag;
+    vd.y = vd.y / mag;
     return vd;
   }
 
@@ -49,38 +32,30 @@ class DrawbotFollowController extends DrawbotController
   }
 
   update() {
-    // compute vd
     var vd = this.seek(this.pos, this.target);
-    var thetad = Math.atan2(vd.y, vd.x);
-    var vdspeed = Math.sqrt(vd.x*vd.x + vd.y*vd.y);
+    var diffx = this.pos.x-this.target.x;
+    var diffy = this.pos.y-this.target.y;
+    var distance = Math.sqrt(diffx*diffx + diffy*diffy);
 
-    // compute control laws
-    // compute smallest angle between thetad and current theta
-    var angleDiff = signedMod((thetad - this.state[this.THETA] + Math.PI), Math.PI * 2.0) - Math.PI;
- 
-    var f = this.m * this.velKv * (vdspeed - this.state[this.VEL]);
-    var t = this.I * (this.oriKp * (angleDiff) - this.oriKv * (this.state[this.THETADOT]));
-
-    //f = Math.min(maxForce, Math.max(-maxForce, f));
-    t = Math.min(this.maxTorque, Math.max(-this.maxTorque, t));
-
-    // compute derivatives and perform Euler step
-    this.deriv[this.THETA] = this.state[this.THETADOT];
-    this.deriv[this.VEL] = f/this.m;
-    this.deriv[this.THETADOT] = t/this.I;
-
-    for (var i = 0; i < this.state.length; i++) {
-      this.state[i] += this.deriv[i] * this.dt;
+    if (distance > 10) 
+    {
+      var v = this.turtle.direction();
+      var theta = Math.acos(vd.x*v.x + vd.y*v.y);
+      if (Math.abs(theta) > Math.PI/8)
+      {
+         var sign = vd.x * v.y - v.x * vd.y;
+         if (sign > 0) goRight(0.2);
+         else goLeft(0.2);
+      }
+      else
+      {
+        goForward(0.2);
+      }
     }
-
-    // convert local values to global values
-    this.vel.x = Math.cos(this.state[this.THETA]) * this.state[this.VEL];
-    this.vel.y = Math.sin(this.state[this.THETA]) * this.state[this.VEL];
-
-    this.pos.x = this.pos.x + this.vel.x * this.dt;
-    this.pos.y = this.pos.y + this.vel.y * this.dt;
-
+ 
+    this.pos = this.turtle.tip();
     this.veld = vd; 
+    this.vel = this.turtle.direction();
     //console.log(state)
   }
 
@@ -92,20 +67,27 @@ class DrawbotFollowController extends DrawbotController
   }
 
   draw() {
-    this.update();
+    var timeNow = new Date();
+    var elapsedTime = timeNow - this.lastTime;
+    this.lastTime = timeNow;
+    this.timer -= elapsedTime;
+    if (this.timer < 0)
+    {
+      this.update();
+      this.timer = this.dt;
+    }
 
     fill(255,0,0);
     noStroke();
-    //ellipse(this.target.x, this.target.y, 15, 15);
+    ellipse(this.target.x, this.target.y, 15, 15);
 
     fill(0,0,255);
     ellipse(this.pos.x, this.pos.y, 25, 25); 
     stroke(0,0,0);
-    line(this.pos.x, this.pos.y, this.pos.x+this.vel.x, this.pos.y+this.vel.y);
+    line(this.pos.x, this.pos.y, this.pos.x+100*this.vel.x, this.pos.y+100*this.vel.y);
     stroke(0,255,0);
-    line(this.pos.x, this.pos.y, this.pos.x+this.veld.x, this.pos.y+this.veld.y);
+    line(this.pos.x, this.pos.y, this.pos.x+100*this.veld.x, this.pos.y+100*this.veld.y);
 
-    console.log(this.pos);
 
     super.draw();
   }
