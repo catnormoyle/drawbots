@@ -49,7 +49,7 @@ class DrawbotFollowController extends DrawbotController
       }
       else
       {
-        goForward(0.2);
+        goForward(0.5);
       }
     }
  
@@ -87,7 +87,6 @@ class DrawbotFollowController extends DrawbotController
     line(this.pos.x, this.pos.y, this.pos.x+100*this.vel.x, this.pos.y+100*this.vel.y);
     stroke(0,255,0);
     line(this.pos.x, this.pos.y, this.pos.x+100*this.veld.x, this.pos.y+100*this.veld.y);
-
 
     super.draw();
   }

@@ -15,6 +15,8 @@ class Turtle {
     this.theta = 0;
     this.turnRate = 10 * Math.PI/ 180.0;
     this.moveRate = 25; // conversion between IRL and canvas units
+    this.size = 30;
+    this.halfSize = 15;
   }
 
   setStartPosition(startx, starty) {
@@ -40,8 +42,8 @@ class Turtle {
 
   tip() {
     var dir = this.direction();
-    var x = this.x + 10 * dir.x;
-    var y = this.y + 10 * dir.y;
+    var x = this.x + this.size * dir.x;
+    var y = this.y + this.size * dir.y;
     return {x:x, y:y};
   }
 
@@ -83,7 +85,7 @@ class Turtle {
     fill(255,0,0);
     translate(this.x, this.y);
     rotate(this.theta);
-    triangle(-5, -5, 0, 10, 5, -5);
+    triangle(-this.halfSize, -this.halfSize, 0, this.size, this.halfSize, -this.halfSize);
     pop();
   }
 }
