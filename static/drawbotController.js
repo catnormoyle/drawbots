@@ -8,6 +8,7 @@ class DrawbotController
 
   setup(x, y) {
     this.turtle.setStartPosition(x, y);
+    this.turtle.init();
   }
 
   mousePressed(mouseX, mouseY) {

@@ -12,10 +12,16 @@ class DrawbotFollowController extends DrawbotController
     this.pos = this.turtle.tip();
     this.vel = this.turtle.direction();
     this.veld = {x:0, y:0};
-    this.dt = 0.1*1000; // how fast we should update in milliseconds (don't want to overload bot)
+    this.dt = 1.0*1000; // how fast we should update in milliseconds (don't want to overload bot)
     this.lastTime = new Date();
     this.timer = this.dt;
   }
+
+  setup(x, y) {
+    super.setup(x, y);
+    this.target = this.turtle.tip();
+  }
+
 
   seek(pos, target) {
     let vd = {x: target.x-pos.x, y: target.y-pos.y};
@@ -37,11 +43,11 @@ class DrawbotFollowController extends DrawbotController
     var diffy = this.pos.y-this.target.y;
     var distance = Math.sqrt(diffx*diffx + diffy*diffy);
 
-    if (distance > 10) 
+    if (distance > this.turtle.moveRate) 
     {
       var v = this.turtle.direction();
       var theta = Math.acos(vd.x*v.x + vd.y*v.y);
-      if (Math.abs(theta) > Math.PI/8)
+      if (Math.abs(theta) > this.turtle.turnRate * 2)
       {
          var sign = vd.x * v.y - v.x * vd.y;
          if (sign > 0) goRight(0.2);

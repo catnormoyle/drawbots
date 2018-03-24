@@ -13,7 +13,7 @@ class Turtle {
     this.startx = 0;
     this.starty = 0;
     this.theta = 0;
-    this.turnRate = 10 * Math.PI/ 180.0;
+    this.turnRate = 30 * Math.PI/ 180.0;
     this.moveRate = 25; // conversion between IRL and canvas units
     this.size = 30;
     this.halfSize = 15;
@@ -55,14 +55,18 @@ class Turtle {
 
   forward(speed) {
     var dir = this.direction();
-    var r = speed * this.moveRate;
+    // ASN TODO: map speed heuristic to distance? 
+    // speed actually determines how long the motor runs -> do we know how much the wheels turn based on time?
+    // or get a sensor to see how often the wheels turn?
+    // or track the robot with an image target?
+    var r = this.moveRate;
     this.x += r * dir.x;
     this.y += r * dir.y;
   }
 
   backward(speed) {
     var dir = this.direction();
-    var r = -speed * this.moveRate;
+    var r = -this.moveRate;
     this.x += r * dir.x;
     this.y += r * dir.y;
   }
