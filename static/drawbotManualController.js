@@ -13,13 +13,13 @@ class DrawbotManualController extends DrawbotController
     $(document).keydown(function(e) {
       // calls global goX functions!
       switch(e.which) {
-         case 39: // left
+	 case 37:// left
            goLeft();	
            break;
          case 38: // up
            goForward();
            break;
-         case 37: // right
+	 case 39: // right
            goRight();	
            break;
          case 40: // down
