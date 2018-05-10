@@ -48,8 +48,8 @@ class Turtle {
   }
 
   direction() {
-    var x = -Math.sin(this.theta);
-    var y =  Math.cos(this.theta);
+    var y =  Math.sin(this.theta);
+    var x =  Math.cos(this.theta);
     return {x:x, y:y};
   }
 
@@ -75,11 +75,11 @@ class Turtle {
   }
 
   left(speed) {
-    this.theta += this.turnRate;
+    this.theta -= this.turnRate;
   }
 
   right(speed) {
-    this.theta -= this.turnRate;
+    this.theta += this.turnRate;
   }
 
   draw() {
@@ -89,6 +89,7 @@ class Turtle {
     fill(255,0,0);
     translate(this.x, this.y);
     rotate(this.theta);
+    rotate(-Math.PI*0.5);
     triangle(-this.halfSize, -this.halfSize, 0, this.size, this.halfSize, -this.halfSize);
     pop();
   }
