@@ -50,8 +50,8 @@ class DrawbotFollowController extends DrawbotController
       if (Math.abs(theta) > this.turtle.turnRate * 2)
       {
          var sign = vd.x * v.y - v.x * vd.y;
-         if (sign > 0) goRight(0.2);
-         else goLeft(0.2);
+         if (sign > 0) goLeft(0.2);
+         else goRight(0.2);
       }
       else
       {
@@ -65,11 +65,17 @@ class DrawbotFollowController extends DrawbotController
     //console.log(state)
   }
 
+  goStop() {
+    this.target = this.turtle.tip();
+    this.pos = this.turtle.tip();
+  }
+
   mouseDragged(mouseX, mouseY) {
     this.target = {x:mouseX, y:mouseY};
   }
 
   mousePressed(mouseX, mouseY) {
+    this.target = {x:mouseX, y:mouseY};
   }
 
   draw() {
