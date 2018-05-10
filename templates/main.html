@@ -21,12 +21,6 @@
    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script>
    <g:hangout render="createhangout"></g:hangout> -->
 
-   <center>
-      <div><img id="mjpeg_dest" /></div>
-   </center>
-
-   <!--<img src= "http://192.168.88.236:8081/?action=stream" width="800" height="460"/> -->
-
    <p>Driving distance increment</p>
    <select id="speed">
       <option value="0.1">Distance 1</option>
@@ -50,6 +44,7 @@
    <button onclick="goBackward();"> Back </button>
    <br><br>
    <div id='simContainer'></div>
+   <iframe src="{{ video_url }}" width="600px" height="600px" scrolling="no"></iframe> 
 
    </body>
 </html>

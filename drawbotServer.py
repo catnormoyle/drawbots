@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
 import datetime
 import sys
 import time
 import serial
+import re
 from drawbot import *
 
 sys.path.append(r'/home/pi')
@@ -14,9 +15,13 @@ drawbot = Drawbot(0.5)
 def hello():
    now = datetime.datetime.now()
    timeString = now.strftime("%Y-%m-%d %H:%M")
+   ip = re.search('([0-9]+.[0-9]+.[0-9]+.[0-9]+)', request.url_root).group(0)
+   video_url = 'http://%s:8080/html'%ip
+   print video_url
    templateData = {
       'title' : 'Drawbots',
-      'time': timeString
+      'time': timeString, 
+      'video_url' : video_url
       }
    return render_template('main.html', **templateData)
 
@@ -24,26 +29,22 @@ def hello():
 def follow():
    now = datetime.datetime.now()
    timeString = now.strftime("%Y-%m-%d %H:%M")
+   ip = re.search('([0-9]+.[0-9]+.[0-9]+.[0-9]+)', request.url_root).group(0)
+   video_url = 'http://%s:8080/html'%ip
    templateData = {
       'title' : 'Drawbots',
-      'time': timeString
+      'time': timeString,
+      'video_url' : video_url
       }
    return render_template('follow.html', **templateData)
   
 @app.route("/cam")
 def cam():
-   now = datetime.datetime.now()
-   timeString = now.strftime("%Y-%m-%d %H:%M")
-   templateData = {
-      'title' : 'Rover 5',
-      'time': timeString
-      }
-   return render_template('camtest.html', **templateData)
+    print request.url_root
+    ip = re.search('([0-9]+.[0-9]+.[0-9]+.[0-9]+)', request.url_root).group(0)
+    print "Redirecting to " + ip
+    return redirect('http://%s:8080/html'%ip, code=302)
  
-@app.route('/test/')
-def vid():
-   drawbot.streamCamera()
-  
 @app.route("/forward/")
 def forward():
   speed = request.args.get('speed', None)
