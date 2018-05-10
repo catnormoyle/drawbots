@@ -45,9 +45,7 @@ function goBackward() {
 }   
 
 function goStop() {
-  var speed = document.getElementById('speed').value;
-  $.ajax({url:"/stop?speed=" + speed});	 	 	 
-  controller.goStop(speed);
+  controller.goStop();
 }  	   
 
 function goLeft() {
@@ -61,4 +59,6 @@ function goRight() {
   $.ajax({url:"/right?speed=" + speed});	 	 	 
   controller.goRight(speed);
 }  	
+
+
 
