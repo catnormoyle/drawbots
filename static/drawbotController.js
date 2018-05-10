@@ -14,6 +14,9 @@ class DrawbotController
   mousePressed(mouseX, mouseY) {
   }
 
+  mouseDragged(mouseX, mouseY) {
+  }
+
   init() {
   }
 
