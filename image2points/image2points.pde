@@ -1,15 +1,25 @@
 import java.util.*;
 
+class Point
+{
+  public PVector xyz;
+  public color rgba;
+  public Point(PVector pt, color c)
+  {
+    rgba = c;
+    xyz = pt;
+  }
+};
+
 PImage img = null;
-List<PVector> points = new ArrayList<PVector>();
+ArrayList<Point> points = new ArrayList<Point>();
+
 float lastTime = 0;
 
 void setup()
 {  
-  
-  size(400, 400, P3D); // width and height should match image!
-  img = loadImage("stars.png");
-  img.resize(width, height);
+  size(380,430,P3D); // width and height should match image!
+  img = loadImage("Scan10004_color_380x430.png");
 
   lastTime = millis();
   
@@ -19,10 +29,10 @@ void setup()
   background(255);
   stroke(255,0,255,100);
   
-  float spread = 25;
-  for (int i = 0; i < img.height; i++)
+  float spread = 200;
+  for (int i = 0; i < width; i++)
   {
-    for (int j = 0; j < img.width; j++)
+    for (int j = 0; j < height; j++)
     {
       color c = img.get(i, j);
       int a = (c >> 24) & 0xFF;
@@ -32,7 +42,8 @@ void setup()
       
       if (r != 255 || g != 255 || b != 255)
       {
-        points.add(new PVector(i, j, spread*(2*noise(i*img.width+j)-1)));
+        float z = spread*(2*noise(i*height+j)-1);
+        points.add(new Point(new PVector(i, j, z), c));
       }      
     }
   }
@@ -53,7 +64,10 @@ void draw()
   beginShape(POINTS);
   for (int i = 0; i < points.size(); i++)
   {
-    PVector pt = (PVector) points.get(i);
+    Point p = (Point) points.get(i);
+    PVector pt = p.xyz;
+    color c = p.rgba;
+    stroke(c);
     vertex(pt.x, pt.y, pt.z);
   } 
   endShape();
