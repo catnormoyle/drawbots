@@ -12,13 +12,9 @@
 <script language="javascript" type="text/javascript" src="static/drawbotFollowController.js"></script>
 <script language="javascript" type="text/javascript" src="static/drawbotP5.js"></script>
 
-<body style="background-color:lightgrey" onload="setTimeout('init();', 100);"> 
-   <h1>Drawbots Control Panel</h1>
-   <h2>The date and time on the server is: {{ time }}</h2> 
-      
-   <!-- Ignore Google Hangout functionality for now --> 
-   <!-- <script src="https://apis.google.com/js/platform.js" async defer></script>
-   <g:hangout render="createhangout"></g:hangout> -->
+<body style="background-color:lightgrey" onload="setTimeout('init();', 100);">
+   <h1>Drawbots Control Panel XX</h1>
+   <h2>The date and time on the server is: {{ time }}</h2>
 
    <center>
       <div><img id="mjpeg_dest" /></div>
@@ -35,11 +31,10 @@
       <option value="0.5">Distance 5</option>
    </select>
    <button id="stop" onclick="goStop();">STOP</button>
-      
+
    <p>Instructions: Hold down the left mouse button to have the robot follow it.
    <div id='simContainer'></div>
-   <iframe src="{{ video_url }}" width="600px" height="600px" scrolling="no"></iframe> 
+   <iframe src="{{ video_url }}" width="600px" height="600px" scrolling="no"></iframe>
 
    </body>
 </html>
-

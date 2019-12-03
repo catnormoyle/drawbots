@@ -12,23 +12,24 @@ class DrawbotManualController extends DrawbotController
   init() {
     $(document).keydown(function(e) {
       // calls global goX functions!
-      switch(e.which) {
-	 case 37:// left
-           goLeft();	
-           break;
-         case 38: // up
-           goForward();
-           break;
-	 case 39: // right
-           goRight();	
-           break;
-         case 40: // down
-           goBackward();
-           break;
-         default: return; // exit this handler for other keys
+    switch(e.which) {
+	    case 37:// left
+        goLeft();
+        break;
+      case 38: // up
+        goForward();
+        break;
+	    case 39: // right
+        goRight();
+        break;
+      case 40: // down
+        goBackward();
+        break;
+      default:
+        return; // exit this handler for other keys
      }
      e.preventDefault(); // prevent the default action (scroll / move caret)
-    }); 
+    });
   }
 }
 

@@ -6,7 +6,7 @@ import serial
 import re
 from drawbot import *
 
-sys.path.append(r'/home/pi')
+sys.path.append('/home/pi')
 
 app = Flask(__name__, template_folder='templates')
 drawbot = Drawbot(0.5)
@@ -20,7 +20,7 @@ def hello():
    print video_url
    templateData = {
       'title' : 'Drawbots',
-      'time': timeString, 
+      'time': timeString,
       'video_url' : video_url
       }
    return render_template('main.html', **templateData)
@@ -37,22 +37,22 @@ def follow():
       'video_url' : video_url
       }
    return render_template('follow.html', **templateData)
-  
+
 @app.route("/cam")
 def cam():
     print request.url_root
     ip = re.search('([0-9]+.[0-9]+.[0-9]+.[0-9]+)', request.url_root).group(0)
     print "Redirecting to " + ip
     return redirect('http://%s:8080/html'%ip, code=302)
- 
+
 @app.route("/forward/")
 def forward():
   speed = request.args.get('speed', None)
   drawbot.forward(speed)
   return 'Click.'
-  
-@app.route("/backward/") 
-def backward(): 
+
+@app.route("/backward/")
+def backward():
   speed = request.args.get('speed', None)
   drawbot.backward(speed)
   return 'Click.'
@@ -68,7 +68,7 @@ def left():
   speed = request.args.get('speed', None)
   drawbot.left(speed)
   return 'Click.'
-  
+
 @app.route("/stop/")
 def stop():
   drawbot.stop()
@@ -76,4 +76,3 @@ def stop():
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=8082, debug=True)
-

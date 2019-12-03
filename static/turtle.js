@@ -17,6 +17,8 @@ class Turtle {
     this.moveRate = 25; // conversion between IRL and canvas units
     this.size = 30;
     this.halfSize = 15;
+    this.penColor = turtle.color.blue;
+
   }
 
   setStartPosition(startx, starty) {
@@ -55,7 +57,7 @@ class Turtle {
 
   forward(speed) {
     var dir = this.direction();
-    // ASN TODO: map speed heuristic to distance? 
+    // ASN TODO: map speed heuristic to distance?
     // speed actually determines how long the motor runs -> do we know how much the wheels turn based on time?
     // or get a sensor to see how often the wheels turn?
     // or track the robot with an image target?
@@ -94,4 +96,3 @@ class Turtle {
     pop();
   }
 }
-

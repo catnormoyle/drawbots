@@ -5,7 +5,7 @@
 </head>
 
 <link rel="stylesheet" href="css/style_minified.css" />
-<!-- Make Ajax calls from button clicks to trigger Flask / python code from serveJohnnyPive.py and send commands to robot -->      
+<!-- Make Ajax calls from button clicks to trigger Flask / python code from serveJohnnyPive.py and send commands to robot -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script language="javascript" type="text/javascript" src="static/p5.min.js"></script>
 <script language="javascript" type="text/javascript" src="static/turtle.js"></script>
@@ -13,11 +13,11 @@
 <script language="javascript" type="text/javascript" src="static/drawbotManualController.js"></script>
 <script language="javascript" type="text/javascript" src="static/drawbotP5.js"></script>
 
-<body style="background-color:lightgrey" onload="setTimeout('init();', 100);"> 
+<body style="background-color:lightgrey" onload="setTimeout('init();', 100);">
    <h1>Drawbots Control Panel</h1>
-   <h2>The date and time on the server is: {{ time }}</h2> 
-      
-   <!-- Ignore Google Hangout functionality for now --> 
+   <h2>The date and time on the server is: {{ time }}</h2>
+
+   <!-- Ignore Google Hangout functionality for now -->
    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script>
    <g:hangout render="createhangout"></g:hangout> -->
 
@@ -29,23 +29,32 @@
       <option value="0.4">Distance 4</option>
       <option value="0.5">Distance 5</option>
    </select>
-      
+
    <br><br>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   <button onclick="goForward();"> Forward </button>
+   <button id="forward" onclick="goForward();"> Forward </button>
    <br>
-   <button onclick="goLeft();"> Left </button>     
+   <button id="left" onclick="goLeft();"> Left </button>
    &nbsp;
-   <button onclick="goStop();"> Stop </button>
+   <button id="stop" onclick="goStop();"> Stop </button>
    &nbsp;
-   <button onclick="goRight();"> Right </button>
+   <button id="right" onclick="goRight();"> Right </button>
    <br>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   <button onclick="goBackward();"> Back </button>
+   <button id="backward" onclick="goBackward();"> Back </button>
    <br><br>
    <div id='simContainer'></div>
-   <iframe src="{{ video_url }}" width="600px" height="600px" scrolling="no"></iframe> 
+   <br>
+   Draw Script Parameters: <br>
+   F - Forward <br>
+   R - Right   <br>
+   L - Left    <br>
+   B - Back    <br>
+   Example: FFFRFF translates to forward 3 moves, right 1 move, forward 2 moves <br>
+   <input type="text" id="drawScriptParameters" size="100" placeholder="Enter draw script parameters ex FFFRFF"><br>
+   <button id="executeDrawScript" style="background-color:red; border-color:blue; color:white" onclick="executeDrawScript();">Execute Draw Script</button>
+  <!-- disable camera feed -->
+  <!-- <iframe src="{{ video_url }}" width="600px" height="600px" scrolling="no"></iframe> -->
 
    </body>
 </html>
-
