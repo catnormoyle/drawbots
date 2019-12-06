@@ -65,34 +65,34 @@ function executeDrawScript() {
   disableAllControlButtons();
 
   for (const c of scriptParameters) {
-    var command = scriptParameters.charAt(i);
-    switch(command) {
+
+    switch(c) {
       case 'F':
-        goForward();
-        break;
+       goForward();
+       continue;
       case 'f':
         goForward();
-        break;
+        continue;
       case 'R':
         goRight();
-        break;
+        continue;
       case 'r':
         goRight();
-        break;
+        continue;
       case 'B':
         goBackward();
-        break;
+        continue;
       case 'b':
         goBackward();
-        break;
+        continue;
       case 'L':
         goLeft();
-        break;
+        continue;
       case 'l':
         goLeft();
-        break;
+        continue;
       default:
-        break;
+        continue;
     }
   }
 }

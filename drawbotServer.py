@@ -6,7 +6,7 @@ import serial
 import re
 from drawbot import *
 
-sys.path.append('/home/pi')
+sys.path.append(r'/home/pi')
 
 app = Flask(__name__, template_folder='templates')
 drawbot = Drawbot(0.5)

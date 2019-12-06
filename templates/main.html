@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/style_minified.css" />
 <!-- Make Ajax calls from button clicks to trigger Flask / python code from serveJohnnyPive.py and send commands to robot -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script language="javascript" type="text/javascript" src="static/p5.min.js"></script>
+<!--<script language="javascript" type="text/javascript" src="static/p5.min.js"></script>-->
 <script language="javascript" type="text/javascript" src="static/turtle.js"></script>
 <script language="javascript" type="text/javascript" src="static/drawbotController.js"></script>
 <script language="javascript" type="text/javascript" src="static/drawbotManualController.js"></script>
@@ -15,11 +15,7 @@
 
 <body style="background-color:lightgrey" onload="setTimeout('init();', 100);">
    <h1>Drawbots Control Panel</h1>
-   <h2>The date and time on the server is: {{ time }}</h2>
-
-   <!-- Ignore Google Hangout functionality for now -->
-   <!-- <script src="https://apis.google.com/js/platform.js" async defer></script>
-   <g:hangout render="createhangout"></g:hangout> -->
+   <!--<h2>The date and time on the server is: {{ time }}</h2>-->
 
    <p>Driving distance increment</p>
    <select id="speed">
@@ -43,7 +39,6 @@
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    <button id="backward" onclick="goBackward();"> Back </button>
    <br><br>
-   <div id='simContainer'></div>
    <br>
    Draw Script Parameters: <br>
    F - Forward <br>
@@ -53,8 +48,7 @@
    Example: FFFRFF translates to forward 3 moves, right 1 move, forward 2 moves <br>
    <input type="text" id="drawScriptParameters" size="100" placeholder="Enter draw script parameters ex FFFRFF"><br>
    <button id="executeDrawScript" style="background-color:red; border-color:blue; color:white" onclick="executeDrawScript();">Execute Draw Script</button>
-  <!-- disable camera feed -->
-  <!-- <iframe src="{{ video_url }}" width="600px" height="600px" scrolling="no"></iframe> -->
 
-   </body>
+  <div id='simContainer'></div>
+  </body>
 </html>
